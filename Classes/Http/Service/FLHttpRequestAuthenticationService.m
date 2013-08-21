@@ -71,7 +71,7 @@
     if(user.authenticationHasExpired) {
     
         if([FLReachableNetwork instance].isReachable) {
-            FLTrace(@"Login expired, will reauthenticate %@", user.userName);
+            FLTrace(@"Login expired, will reauthenticate %@", user.userLogin.userName);
             [user setLoginUnathenticated];
             return YES;
         }
@@ -131,7 +131,7 @@
         [user touchAuthenticationTimestamp];
         [self.delegate httpRequestAuthenticationService:self didAuthenticateUser:user];
     } 
-    withCompletion:completion];
+    completion:completion];
 
 }
 

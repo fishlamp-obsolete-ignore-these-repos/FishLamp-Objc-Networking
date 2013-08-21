@@ -9,11 +9,11 @@
 
 #import "FLNetworkStream.h"
 
-@interface FLRunLoopNetworkStreamEventHandler : NSObject {
+@interface FLRunLoopNetworkStreamEventHandler : NSObject<FLNetworkStreamEventHandler> {
 @private
     __unsafe_unretained NSRunLoop* _runLoop;
     __unsafe_unretained FLNetworkStream* _stream;
     __unsafe_unretained NSThread* _thread;
 }
-
+- (NSString*) runLoopMode;
 @end
