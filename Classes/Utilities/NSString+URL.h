@@ -8,13 +8,14 @@
 //
 
 #import "FLCocoaRequired.h"
-#import "FishLampCore.h"
+#import "FishLampMinimum.h"
 
 @interface NSString (URL)
 
-+ (NSString*) URLString:(NSString*) url params:(NSString*) firstParameter, ...  NS_REQUIRES_NIL_TERMINATION;
++ (NSString*) URLString:(NSString*) url
+                 params:(NSString*) firstParameter, ...  NS_FORMAT_FUNCTION(2,3);
 
-- (NSString*) appendURLParameters:(NSString*) firstParameter, ...  NS_REQUIRES_NIL_TERMINATION;
+- (NSString*) appendURLParameters:(NSString*) firstParameter, ...  NS_FORMAT_FUNCTION(1,2);
 
 - (NSString *) urlEncodeString:(NSStringEncoding)encoding;
 - (NSString *) urlDecodeString:(NSStringEncoding) encoding;

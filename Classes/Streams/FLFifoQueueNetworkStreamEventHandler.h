@@ -13,11 +13,8 @@
 @interface FLFifoQueueNetworkStreamEventHandler : NSObject<FLNetworkStreamEventHandler> {
 @private
     FLFifoAsyncQueue* _asyncQueue;
-    FLNetworkStream* _stream;
+    __unsafe_unretained FLNetworkStream* _stream;
 }
 
 @property (readonly, strong, nonatomic) FLFifoAsyncQueue* asyncQueue;
-
-
-
 @end

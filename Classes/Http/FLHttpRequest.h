@@ -7,9 +7,10 @@
 //  The FishLamp Framework is released under the MIT License: http://fishlamp.com/license 
 //
 
-#import "FishLampCore.h"
-#import "FLAsyncOperation.h"
+#import "FishLampMinimum.h"
+#import "FLOperation.h"
 #import "FLHttpStream.h"
+#import "FLHttpRequestAuthenticator.h"
 
 #define FLHttpRequestDefaultTimeoutInterval 120.0f
 
@@ -27,16 +28,13 @@
 
 @protocol FLRetryHandler;
 
-@protocol FLHttpRequestAuthenticator <NSObject>
-//// this needs to be synchronous for scheduling reasons amoung concurrent requests.
-- (void) authenticateHttpRequest:(FLHttpRequest*) request;
-@end
+
 
 @protocol FLHttpRequestContext <NSObject>
 - (id<FLHttpRequestAuthenticator>) httpRequestAuthenticator;
 @end
 
-@interface FLHttpRequest : FLAsyncOperation<FLHttpStreamDelegate> {
+@interface FLHttpRequest : FLOperation<FLHttpStreamDelegate> {
 @private
     FLHttpRequestHeaders* _requestHeaders;
     FLHttpRequestBody* _requestBody;
@@ -52,13 +50,13 @@
 
     // helpers
     id<FLInputSink> _inputSink;
-    id<FLHttpRequestAuthenticator> _authenticator;
+    id<FLHttpRequestAuthenticator> _httpRequestAuthenticator;
     BOOL _disableAuthenticator;
 }
 
 @property (readwrite, nonatomic, strong) id<FLRetryHandler> retryHandler;
 @property (readwrite, strong, nonatomic) id<FLInputSink> inputSink;
-@property (readwrite, strong, nonatomic) id<FLHttpRequestAuthenticator> authenticator;
+@property (readwrite, strong, nonatomic) id<FLHttpRequestAuthenticator> httpRequestAuthenticator;
 
 // timeouts
 @property (readwrite, assign, nonatomic) NSTimeInterval timeoutInterval;
